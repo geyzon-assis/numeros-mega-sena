@@ -1,22 +1,29 @@
-export default function mainPage() {
+import { JSXElementConstructor, ReactElement, ReactFragment, ReactPortal, useState } from "react"
+import ContadorDisplay from "../components/ContadorDisplay"
+import gerarNumeros from "../components/geradorDeNumeros"
+
+export default function MainPage() {
+
+
+  let resultArray: number[] = []
+  const [qnt, setQnt] = useState('')
+  const [result, setResult] = useState([0])
   return (
     <div>
-      <input type="text" />
-      <button onClick={() => gerarNumeros(6)}> Gerar numeros</button>
-    </div>
+      <input type="number" value={qnt} onChange={e => setQnt(e.target.value)} />
+      <button onClick={
+        () => {
+          setResult([])
+          resultArray = gerarNumeros(Number(qnt));
+          loopNumeros()
+        }}> Gerar numeros
+      </button>
+      <div><ContadorDisplay array={result} /></div>
+    </div >
   )
-}
-function gerarNumeros(quantidade: number) {
-  const result: (string | number)[] = []
-  while (result.length < quantidade) {
-    let newNumber = numeroAleatorio(60)
-    if (!result.includes(newNumber)) {
-      result.push(newNumber)
-      console.log(newNumber)
+  function loopNumeros() {
+    for (const a of resultArray) {
+      setResult(prev => [...prev, a])
     }
   }
-  return result
-}
-function numeroAleatorio(num: number) {
-  return Math.ceil(Math.random() * num).toString()
 }
