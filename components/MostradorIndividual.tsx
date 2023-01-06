@@ -1,6 +1,6 @@
 export default function MostradorIndividual(props: any) {
   return (
-    <span style={{
+    <div style={{
       display: "flex",
       justifyContent: "center",
       alignItems: "center",
@@ -13,6 +13,6 @@ export default function MostradorIndividual(props: any) {
       margin: "20px"
     }} >
       {props.valor}
-    </span>
+    </div>
   )
 }

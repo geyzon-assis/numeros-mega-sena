@@ -1,10 +1,11 @@
 import { useState } from "react";
-import MostradorIndividual from "../components/MostradorIndividual";
 import mega from "../functions/mega";
+import dynamic from "next/dynamic";
+const MostradorIndividual = dynamic(() => import('../components/MostradorIndividual'), { ssr: false })
 
 export default function Megasena() {
   const [numeros, setNumeros] = useState(mega())
-  const [quantidade, setQuantidade] = useState(numeros)
+  const [quantidade, setQuantidade] = useState(6)
 
   function renderNumeros() {
     return numeros.map((n: any) => <MostradorIndividual valor={n} key={n} />)
